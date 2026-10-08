@@ -3,9 +3,13 @@ services:
     build: .
     restart: unless-stopped
     init: true
-    env_file: .env
     environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:?DISCORD_TOKEN manquant}
+      DISCORD_APPLICATION_ID: ${DISCORD_APPLICATION_ID:?DISCORD_APPLICATION_ID manquant}
       DATABASE_PATH: /app/data/tempvoice.sqlite
+      EMPTY_DELETE_DELAY_MS: ${EMPTY_DELETE_DELAY_MS:-10000}
+      CREATION_COOLDOWN_MS: ${CREATION_COOLDOWN_MS:-10000}
+      MAX_TEMP_CHANNELS: ${MAX_TEMP_CHANNELS:-30}
     volumes:
       - tempvoice-data:/app/data
     stop_grace_period: 20s
