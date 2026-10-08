@@ -1,0 +1,14 @@
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      DATABASE_PATH: /app/data/tempvoice.sqlite
+    volumes:
+      - tempvoice-data:/app/data
+    stop_grace_period: 20s
+
+volumes:
+  tempvoice-data:
