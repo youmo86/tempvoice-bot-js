@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Politique de confidentialité — tempvoice bot</title>
+  <meta name="description" content="Politique de confidentialité de l’application Discord tempvoice bot : données collectées, durées de conservation et demandes de suppression.">
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.55; color: #1c1c1c; background: #f6f7f9; }
+    main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; background: #fff; }
+    h1 { font-size: 1.75rem; line-height: 1.2; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.15rem; margin-top: 2rem; }
+    p, li { font-size: 1rem; }
+    .meta { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { border: 1px solid #d5d8de; padding: 0.55rem 0.65rem; text-align: left; vertical-align: top; }
+    th { background: #f0f2f5; }
+    nav { margin-top: 2rem; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Politique de confidentialité</h1>
+    <p class="meta">Application Discord <strong>tempvoice bot</strong> · équipe <strong>youmo</strong><br>Dernière mise à jour : 8 octobre 2026</p>
+
+    <p>Cette politique décrit les données traitées par l’application Discord <strong>tempvoice bot</strong> lorsque tu l’invites sur un serveur ou que tu rejoins un salon vocal générateur. Elle est publiée pour les utilisateurs de l’application et pour la vérification demandée par Discord.</p>
+    <p>Le responsable du traitement est le propriétaire de l’application Discord <strong>tempvoice bot</strong>, identifiable dans le portail développeur Discord sous l’équipe <strong>youmo</strong>. Cette politique ne remplace pas la <a href="https://discord.com/privacy">politique de confidentialité de Discord</a> ni les <a href="https://support-dev.discord.com/hc/en-us/articles/8562894815383">conditions développeur de Discord</a>, qui s’appliquent aux données traitées par Discord lui-même.</p>
+
+    <h2>1. Ce que fait l’application</h2>
+    <p>tempvoice bot crée un salon vocal temporaire lorsqu’un membre rejoint un salon générateur configuré par un administrateur du serveur. Le salon reprend les permissions de la catégorie choisie, puis il est supprimé après un court délai s’il ne contient plus personne. L’application ne rejoint pas les conversations et ne traite pas leur audio.</p>
+
+    <h2>2. Données traitées</h2>
+    <p>L’application utilise uniquement les intents Discord <strong>Guilds</strong> et <strong>GuildVoiceStates</strong>. Elle n’utilise pas les intents privilégiés Message Content, Server Members ni Presence.</p>
+    <table>
+      <thead>
+        <tr><th>Donnée</th><th>Usage</th><th>Conservation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Identifiant du serveur Discord</td>
+          <td>Isoler la configuration de chaque serveur.</td>
+          <td>Base SQLite locale, tant que la configuration existe.</td>
+        </tr>
+        <tr>
+          <td>Identifiants du salon générateur, de la catégorie, modèle de nom et limite de places</td>
+          <td>Créer les salons temporaires selon le réglage d’un administrateur.</td>
+          <td>Base SQLite locale, jusqu’à la désactivation du générateur ou l’effacement demandé.</td>
+        </tr>
+        <tr>
+          <td>Identifiant Discord du membre qui crée un salon</td>
+          <td>Lui rendre son salon s’il repasse par le même générateur avant sa suppression.</td>
+          <td>Base SQLite locale, jusqu’à la suppression du salon temporaire.</td>
+        </tr>
+        <tr>
+          <td>Nom affiché du membre</td>
+          <td>Nommer le salon au moment de sa création lorsque le modèle contient <code>{user}</code>.</td>
+          <td>Aucune copie séparée. Le nom devient celui du salon Discord, puis disparaît avec le salon.</td>
+        </tr>
+        <tr>
+          <td>Salon vocal actuellement rejoint</td>
+          <td>Créer le salon, y déplacer le membre, puis le supprimer lorsqu’il est vide.</td>
+          <td>Traité en mémoire le temps de l’opération. Aucun historique de présence n’est enregistré.</td>
+        </tr>
+        <tr>
+          <td>Date de création du salon temporaire</td>
+          <td>Retrouver et nettoyer les salons gérés.</td>
+          <td>Base SQLite locale, supprimée avec l’enregistrement du salon.</td>
+        </tr>
+        <tr>
+          <td>Délai entre deux créations</td>
+          <td>Limiter les créations répétées par un même membre sur un même serveur.</td>
+          <td>Mémoire vive uniquement. Effacé au redémarrage de l’application.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Les réponses aux commandes sont éphémères : elles ne sont visibles que par leur auteur et ne sont pas archivées par l’application.</p>
+
+    <h2>3. Données qui ne sont pas collectées</h2>
+    <p>L’application ne lit pas le contenu des messages, ne reçoit pas l’audio des salons vocaux, et n’enregistre ni adresse e-mail, ni adresse IP, ni liste d’amis, ni statut de présence. Elle ne vend aucune donnée et n’utilise pas de publicité ni d’outil de mesure d’audience tiers.</p>
+
+    <h2>4. Finalités et bases légales</h2>
+    <p>Les données servent uniquement à fournir le service demandé par l’administrateur qui installe et configure le bot : créer, synchroniser et supprimer les salons vocaux temporaires, appliquer les quotas du serveur, et répondre aux commandes.</p>
+    <p>Pour les personnes situées dans l’Espace économique européen ou au Royaume-Uni, la base légale est l’intérêt légitime de l’opérateur et de l’administrateur du serveur à faire fonctionner cette fonctionnalité (article 6, paragraphe 1, point f, du RGPD). Le traitement est limité aux identifiants nécessaires. L’administrateur du serveur décide d’inviter l’application et de désigner les salons générateurs.</p>
+
+    <h2>5. Destinataires</h2>
+    <ul>
+      <li><strong>Discord.</strong> Les salons, leurs noms, leurs permissions et les déplacements vocaux sont créés via l’API Discord. Discord traite ces informations selon sa propre politique. L’identifiant du créateur peut apparaître dans la raison d’audit Discord de la création du salon.</li>
+      <li><strong>Hébergement.</strong> La base SQLite reste sur la machine ou le serveur contrôlé par l’opérateur de tempvoice bot. Aucun prestataire d’analyse n’est utilisé.</li>
+      <li><strong>Administrateurs du serveur.</strong> La commande <code>/vocal infos</code> peut indiquer au membre présent dans un salon temporaire l’identifiant Discord de son créateur.</li>
+    </ul>
+    <p>Les données ne sont pas cédées, louées ni transmises à des partenaires commerciaux.</p>
+
+    <h2>6. Durée de conservation</h2>
+    <ul>
+      <li>L’enregistrement d’un salon temporaire est supprimé lorsque le salon vide est supprimé, en principe dix secondes après le départ du dernier membre.</li>
+      <li>La configuration d’un générateur est conservée tant qu’un administrateur ne la retire pas.</li>
+      <li>Si le bot quitte un serveur, cette configuration peut rester en base afin de reprendre le service en cas de réinvitation. Elle est effacée sur demande.</li>
+      <li>Les délais de création en mémoire disparaissent au redémarrage.</li>
+    </ul>
+
+    <h2>7. Sécurité</h2>
+    <p>Le jeton du bot et la base SQLite restent sur l’infrastructure de l’opérateur. Ils ne sont pas publiés dans le dépôt du projet. L’accès aux commandes de configuration est réservé aux membres disposant de la permission Discord « Gérer le serveur », et seulement sur le serveur où la commande est utilisée.</p>
+
+    <h2>8. Tes droits et la suppression</h2>
+    <p>Selon le droit applicable, tu peux demander l’accès aux données qui te concernent, leur rectification, leur effacement, la limitation du traitement, et t’opposer à un traitement fondé sur l’intérêt légitime. Tu peux aussi introduire une réclamation auprès de la <a href="https://www.cnil.fr">CNIL</a> si tu es en France, ou auprès de l’autorité de protection des données de ton pays.</p>
+    <p>Pour demander la suppression :</p>
+    <ol>
+      <li>Contacte l’équipe <strong>youmo</strong>, propriétaire de l’application, par message privé Discord.</li>
+      <li>Indique ton identifiant Discord et, si la demande concerne un serveur, l’identifiant de ce serveur.</li>
+      <li>L’opérateur supprime alors les enregistrements correspondants de la base locale.</li>
+    </ol>
+    <p>Retirer le bot d’un serveur arrête immédiatement le service sur ce serveur. Les salons temporaires encore enregistrés ne sont plus gérés. Une demande explicite reste nécessaire pour effacer la configuration conservée en vue d’une réinvitation.</p>
+    <p>Un administrateur peut aussi limiter le traitement en désactivant les générateurs avec <code>/pilotes supprimer</code> ou en expulsant l’application.</p>
+
+    <h2>9. Mineurs</h2>
+    <p>L’application s’adresse aux personnes autorisées à utiliser Discord. Elle ne cherche pas à identifier l’âge des membres et ne collecte pas de donnée supplémentaire à cette fin. L’usage de Discord reste soumis aux conditions d’âge de Discord.</p>
+
+    <h2>10. Modifications</h2>
+    <p>Si le fonctionnement de l’application change de façon importante, notamment les données collectées, cette page sera mise à jour et la date indiquée en haut sera modifiée. L’adresse publique de cette politique reste celle enregistrée dans le portail développeur Discord.</p>
+
+    <h2>11. Contact</h2>
+    <p id="contact">Propriétaire de l’application : équipe Discord <strong>youmo</strong>, application <strong>tempvoice bot</strong>. Les demandes d’accès, de suppression ou toute question relative à cette politique se font par message privé Discord à cette équipe.</p>
+
+    <nav>
+      <a href="./conditions-d-utilisation.html">Conditions d’utilisation</a>
+    </nav>
+  </main>
+</body>
+</html>
